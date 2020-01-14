@@ -17,6 +17,7 @@ class Badge extends StatefulWidget {
   final double borderRadius;
   final BadgeAnimationType animationType;
   final bool showBadge;
+  final bool skipFirstAnimation;
 
   Badge({
     Key key,
@@ -32,6 +33,7 @@ class Badge extends StatefulWidget {
     this.borderRadius,
     this.animationType = BadgeAnimationType.slide,
     this.showBadge = true,
+    this.skipFirstAnimation = false,
   }) : super(key: key);
 
   @override
@@ -68,7 +70,11 @@ class BadgeState extends State<Badge> with SingleTickerProviderStateMixin {
           CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
     }
 
-    _animationController.forward();
+    if (widget.skipFirstAnimation) {
+      _animationController.value = 1.0;
+    } else {
+      _animationController.forward();
+    }
   }
 
   @override
