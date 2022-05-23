@@ -83,7 +83,7 @@ class BadgeState extends State<Badge> with SingleTickerProviderStateMixin {
       return _getBadge();
     } else {
       return Stack(
-        overflow: Overflow.visible,
+        clipBehavior: Clip.none,
         children: [
           widget.child,
           BadgePositioned(
